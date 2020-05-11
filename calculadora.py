@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 def prioridad(elem):#función para un sort
     if elem[1]=="**":return 1
