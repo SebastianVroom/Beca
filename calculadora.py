@@ -5,7 +5,7 @@ def prioridad(elem):#función para un sort
     elif  elem[1]=="/":return 3
     elif  elem[1]=="+":return 4
     elif  elem[1]=="-":return 5
-def pelar_parentesis(cad):
+def pelar_parentesis(cad):#Detecta parentesis dentro de una cadena, los trocea y coloca el resulrado en una lista
     recur=False
     resul=[]
     i=0
@@ -38,7 +38,7 @@ def pelar_parentesis(cad):
         return resul
     else:
         return None
-def extraer_operadores(cad):#función para una funcionalidad especial de la calculadora, extrae operadores de una cadena y los devuelve en forma de lista junto con su posicón en la expresión
+def extraer_operadores(cad):#función que extrae operadores de una cadena y los devuelve en forma de lista junto con su posicón en la expresión
     pos=0
     resul=[]
     for i in range(len(cad)):
@@ -61,7 +61,7 @@ def extraer_operadores(cad):#función para una funcionalidad especial de la calc
             pos+=1
     resul.sort(key=prioridad)#organiza el orden de los operadores segun su prioridad matematica
     return resul
-def extraer_numeros(cad):#función para una funcionalidad especial de la calculadora, extrae numeros de una cadena
+def extraer_numeros(cad):#función que extrae numeros de una cadena
     resul=[]
     num=""
     unineg=False
@@ -85,13 +85,13 @@ def extraer_numeros(cad):#función para una funcionalidad especial de la calcula
         if num!="":
             resul.append(float(num))
     return resul
-def procesado_expresion(cad):
+def procesado_expresion(cad):#Realiza las operaciónes en las cadenas usando las funciones de extracción
     oper=extraer_operadores(cad)
     nums=extraer_numeros(cad)
     ctrlpos=[]#apunta las posiciones de los operadores ya procesados
     while (len(nums)-1):#procesa las dos cadenas segun la prioridad de los operadores, va borrando elementos de las listas segun las procesa, hasta que solo queda el resultado final
         varpos=0 
-        if len(ctrlpos)>0:#segun va procesando y modificando la lista las posiciones iniciales de los operadores se vuelven imprecisas debido al cambio de los index, variable varpos (variacion posicion) es calculada y usada para corregir el cambio
+        if len(ctrlpos)>0:
             for i in ctrlpos:
                 if oper [0][0]>i:
                     varpos+=1
@@ -118,9 +118,9 @@ def procesado_expresion(cad):
         del oper[0]
     else:
         return nums[0]
-def strsust (cad,insrt,pos):
+def strsust (cad,insrt,pos):#funcion para operar en cadena,(Si hice la calculadora antes de terminar el capitulo de python en cadenas)
     return cad[:pos]+insrt+cad[pos+1:]
-def control_expresion(lis):
+def control_expresion(lis):#recibe la lista resultada de la función pelar_parentesis y la procesa elemento a elemento
     if isinstance(lis,str):
         return procesado_expresion(lis)
     if len(lis)>1:
